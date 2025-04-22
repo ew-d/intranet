@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>Cyborg - Awesome HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link type=text/css href="<?=base_url()?>public/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type=text/css href="<?=base_url()?>public/assets/css/fontawesome.css">
+    <link rel="stylesheet" type=text/css href="<?=base_url()?>public/assets/css/templatemo-cyborg-gaming.css">
+    <link rel="stylesheet" type=text/css href="<?=base_url()?>public/assets/css/owl.css">
+    <link rel="stylesheet" type=text/css href="<?=base_url()?>public/assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+<style>
+    /* Estilo para el Navbar */
+      .main-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #1e1e1e;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* Estilo para el contenedor dentro del navbar */
+      .main-nav .container {
+        max-width: 100% !important;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+
+      /* Cuando hace scroll, agrandar el navbar */
+      .main-nav.scrolled {
+        padding: 15px 0;
+        background-color: #111 !important;
+      }
+
+      /* Estilo del logo */
+      .logo img {
+        width: 25%;
+        transition: all 0.3s ease;
+      }
+
+      /* Menú de navegación */
+      .navbar-nav .nav-link {
+        color: #bcbcbc !important;
+        margin: 0 15px;
+        transition: color 0.3s ease;
+      }
+
+      .navbar-nav .nav-link.active,
+      .navbar-nav .nav-link:hover {
+        color: #ff4081 !important;
+      }
+
+      
+
+      /* animación al buscar */
+      .search-input input {
+        background-color: #222;
+        border: none;
+        color: white;
+      }
+
+      .search-input i {
+        color: white;
+      }
+
+      /* desplazamiento */
+      .main-nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #1e1e1e !important;
+        opacity: 1 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        
+      }
+
+      /* Espaciado del navbar 
+      .header-area {
+        background-color: #1e1e1e !important;
+      }*/
+
+      
+      .main-nav * {
+        background-color: transparent !important;
+      }
+
+      .navbar {
+        padding: 20px 40px;
+        border-radius: 0 0 25px 25px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        width: 100%;
+      }
+
+  
+      .navbar-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+      }
+
+      .navbar-nav li {
+        display: inline-block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+ <!-- ***** Header Area Start ***** -->
+<header class="header-area">
+    <nav class="main-nav navbar navbar-expand-lg">
+        <div class="container d-flex justify-content-between align-items-center container-fluid">
+            <!-- Logo (sin cambios) -->
+            <a href="<?= base_url() ?>" class="logo">
+                <img src="<?= base_url() ?>public/assets/images/logo-t2.png" alt="" style="width: 25%;">
+            </a>
+
+            <!-- Buscador (sin cambios) -->
+            <div class="search-input">
+                <form id="search" action="#">
+                    <input type="text" placeholder="Escribe algo" id='searchText' name="searchKeyword" />
+                    <i class="fa fa-search"></i>
+                </form>
+            </div>
+
+            <!-- Menú Principal (optimizado) -->
+            <ul class="nav">
+              <!-- Elementos existentes (no los modifiques) -->
+              <li><a href="<?= base_url() ?>">Inicio</a></li>
+              <li><a href="<?= base_url('browse') ?>">Nosotros</a></li>
+              <li><a href="<?= base_url('details') ?>">Beneficios</a></li>
+              <li><a href="<?= base_url('streams') ?>">Tienda</a></li>
+              
+    <!-- Nuevo: Eventos SOLO para logueados -->
+    <?php if($this->session->userdata('logueado')): ?>
+        <li><a href="<?= base_url('eventos') ?>">Eventos</a></li>
+    <?php endif; ?>
+    
+    <!-- Botón de Login/Logout (sin cambiar estructura) -->
+    <?php if($this->session->userdata('logueado')): ?>
+        <li><a href="<?= base_url('logout') ?>">Cerrar Sesión</a></li>
+    <?php else: ?>
+        <li><a href="<?= base_url('login') ?>">Iniciar Sesión</a></li>
+    <?php endif; ?>
+</ul>
+        </div>
+    </nav>
+</header>
+
+          <!-- Botón de menú móvil -->
+          <a class='menu-trigger'>
+            <span></span>
+          </a>
+        </div>
+      </nav>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- Aquí puedes añadir el resto de tu contenido -->
+    <div class="content">
+      <!-- Contenido aquí -->
+    </div>
+
+    <!-- Scripts de Bootstrap y JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Añadir la clase 'scrolled' al navbar cuando se haga scroll
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 50) {
+          $('.main-nav').addClass('scrolled');
+        } else {
+          $('.main-nav').removeClass('scrolled');
+        }
+      });
+    </script>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+
+  <!-- ***** Banner Carousel Start ***** -->
+<div id="bannerCarousel" class="carousel slide main-banner" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <!-- Slide 1 -->
+    <div class="carousel-item active">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="header-text">
+            <h6>Bienvenido a Sal de Apuros</h6>
+            <h4><em>Sorteos</em> regalos <br>y mucho más</br></h4>
+            <div class="main-button">
+              <a href="browse.html">¡Suscríbete ya!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="carousel-item">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="header-text">
+            <h6>Bienvenido a Sal de Apuros</h6>
+            <h4><em>Sorteos</em> regalos<br>y mucho más</br></h4>
+            <div class="main-button">
+              <a href="events.html">¡Suscríbete ya!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="carousel-item">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="header-text">
+            <h6>¡Beneficios para suscriptores!</h6>
+            <h4><em>Premios</em> exclusivos<br>cada mes</br></h4>
+            <div class="main-button">
+              <a href="benefits.html">Conócelos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controles del carrusel -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<style>
+  .carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: rgba(41, 39, 39, 0.4); /* Fondo semitransparente */
+  border-radius: 50%;
+  z-index: 1001;
+}
+
+.carousel-control-prev {
+  left: -50px; /* Ajusta este valor si se salen mucho o poco */
+}
+
+.carousel-control-next {
+  right: -50px;
+}
+
+/* Opcional: cambia el ícono si quieres más visibilidad */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1); /* Hace los íconos blancos */
+}
+</style>
+<!-- ***** Banner Carousel End ***** -->
+
+          <!-- ***** Most Popular Start ***** -->
+          <div class="most-popular">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em></em> ¡Nuestros Premios!</h4>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="<?= base_url() ?>public/assets/images/popular-01.jpg" alt="">
+                      <h4>Apple<br><span>Smartphones </span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="<?= base_url() ?>public/assets/images/popular-02.jpg" alt="">
+                      <h4>Sony<br><span>Auriculares </span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="<?= base_url() ?>public/assets/images/popular-03.jpg" alt="">
+                      <h4>Galaxy Watch<br><span>Smartwatches </span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                     <img src="<?= base_url() ?>public/assets/images/popular-04.jpg" alt="">
+                      <h4>JBL<br><span>Altavoces </span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="item">
+                      <div class="row">
+                        <div class="col-lg-6 col-sm-6">
+                          <div class="item inner-item">
+                            <img src="<?= base_url() ?>public/assets/images/popular-05.jpg" alt="">
+                            <h4>Canon<br><span>Cámaras </span></h4>
+                            <ul>
+                              <li><i class="fa fa-star"></i> 4.8</li>
+                              <li><i class="fa fa-download"></i> 2.3M</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6">
+                          <div class="item">
+                            <img src="<?= base_url() ?>public/assets/images/popular-06.jpg" alt="">
+                            <h4>Logitech<br><span>Teclados </span></h4>
+                            <ul>
+                              <li><i class="fa fa-star"></i> 4.8</li>
+                              <li><i class="fa fa-download"></i> 2.3M</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="<?= base_url() ?>public/assets/images/popular-07.jpg" alt="">
+                      <h4>Aukey<br><span>Baterías</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="item">
+                      <img src="<?= base_url() ?>public/assets/images/popular-08.jpg" alt="">
+                      <h4>Galaxy Tab<br><span>Tabletas </span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 4.8</li>
+                        <li><i class="fa fa-download"></i> 2.3M</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="main-button">
+                      <a href="browse.html">Descubre más</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Most Popular End ***** -->
+
+<!-- ***** Beneficios de Suscripción Start ***** -->
+<div class="gaming-library">
+  <div class="col-lg-12">
+    <div class="heading-section">
+      <h4><em></em>Nuestros Beneficios</h4>
+    </div>
+
+    <div class="beneficios-grid">
+      <!-- Columna Izquierda -->
+      <div class="beneficios-col">
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-evento.png" alt="Eventos" class="templatemo-item"></li>
+            <li>
+              <h4>Notificación de eventos presenciales</h4>
+              <span>Para la comunidad y público en general.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-cine.png" alt="Cine" class="templatemo-item"></li>
+            <li>
+              <h4>Entradas para el Cine</h4>
+              <span>Disfruta de pre-estrenos exclusivos ¡Descubre si fuiste elegido!</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-reunion.png" alt="Reunión" class="templatemo-item"></li>
+            <li>
+              <h4>Reunión de Suscriptores</h4>
+              <span>Podrás ser elegido para una actividad con juegos, premios y fotos junto a Phillip.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-premios.png" alt="Premios" class="templatemo-item"></li>
+            <li>
+              <h4>Increíbles Premios</h4>
+              <span>Sorpréndete mes a mes con nuestros premios exclusivos.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-streaming.png" alt="Streaming" class="templatemo-item"></li>
+            <li>
+              <h4>Acceso a Streaming Exclusivo</h4>
+              <span>Contenidos únicos y detrás de cámaras solo para suscriptores.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Columna Derecha -->
+      <div class="beneficios-col">
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-descuentos.png" alt="Descuentos" class="templatemo-item"></li>
+            <li>
+              <h4>Descuentos Especiales</h4>
+              <span>En productos, eventos y colaboraciones oficiales.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-sorteos.png" alt="Sorteos" class="templatemo-item"></li>
+            <li>
+              <h4>Participación en Sorteos</h4>
+              <span>Cada mes puedes ganar premios increíbles.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-insignia.png" alt="Insignia" class="templatemo-item"></li>
+            <li>
+              <h4>Insignia Exclusiva</h4>
+              <span>Tu perfil mostrará una insignia única de suscriptor.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-vip.png" alt="VIP" class="templatemo-item"></li>
+            <li>
+              <h4>Acceso VIP a Eventos</h4>
+              <span>Prioridad en reservas y acceso especial.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <ul>
+            <li><img src="<?= base_url() ?>public/assets/images/beneficio-comunidad.png" alt="Comunidad" class="templatemo-item"></li>
+            <li>
+              <h4>Canal privado de Comunidad</h4>
+              <span>Conecta con otros suscriptores y accede a contenido anticipado.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-button" style="margin-top: 2rem;">
+      <a href="profile.html">Conoce más beneficios</a>
+    </div>
+  </div>
+</div>
+<!-- ***** Beneficios de Suscripción End ***** -->
+
+
+  <!-- ***** Banner Start ***** -->
+  <div class="main-banner" style="margin-top: 50px;"> <!-- Agregado margen superior -->
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="header-text">
+          <h6>Bienvenido a Cyborg</h6>
+          <h4><em>Navega</em> Y conoce nuestros Beneficios</h4>
+          <div class="main-button">
+            <a href="browse.html">Suscribete ya!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Banner End ***** -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright © 2025 <a href="#">INTRANET</a> Company. Todos los derechos reservados. 
+          <br>Hecho por Digital Go Perú. <a href="https://templatemo.com" target="_blank" title="free CSS templates"></a> <a href="https://themewagon.com" target="_blank" ></a></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+</body>
+
+</html>
+
+  <!-- Bootstrap core JavaScript -->
+  <script type=text/javascript src="<?=base_url()?>public/vendor/jquery/jquery.min.js"></script>
+  <script type=text/javascript src="<?=base_url()?>public/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script type=text/javascript src="<?=base_url()?>public/assets/js/isotope.min.js"></script>
+  <script type=text/javascript src="<?=base_url()?>public/assets/js/owl-carousel.js"></script>
+  <script type=text/javascript src="<?=base_url()?>public/assets/js/tabs.js"></script>
+  <script type=text/javascript src="<?=base_url()?>public/assets/js/popup.js"></script>
+  <script type=text/javascript src="<?=base_url()?>public/assets/js/custom.js"></script>
+
+
+  </body>
+
+</html>
