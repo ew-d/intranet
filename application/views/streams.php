@@ -20,189 +20,187 @@
     <link rel="stylesheet" type=text/css href="<?=base_url()?>public/assets/css/owl.css">
     <link rel="stylesheet" type=text/css href="<?=base_url()?>public/assets/css/animate.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-<style>
-    /* Estilo para el Navbar */
-      .main-nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background-color: #1e1e1e;
-        z-index: 1000;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease-in-out;
+    <style>
+    body {
+      margin: 0;
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .main-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #1e1e1e;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .main-nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+
+    .logo img {
+      width: 25%;
+    }
+
+    .nav {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav li a {
+      color: #bcbcbc;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+
+    .nav li a:hover {
+      color: #ff4081;
+    }
+
+    .menu-trigger {
+      display: none;
+      cursor: pointer;
+      color: white;
+    }
+
+    .menu-trigger span {
+      font-size: 1.2rem;
+    }
+
+    /* Menú móvil */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background-color: #1e1e1e; /* Color sólido, opaco */
+      z-index: 999;
+      padding: 20px;
+      animation: dropDown 0.3s ease-out;
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    .mobile-menu ul li {
+      margin: 10px 0;
+    }
+
+    .mobile-menu ul li a {
+      display: block; /* Todo el bloque es clickable */
+      background-color: #2a2a2a;
+      color: white;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-menu ul li a:hover {
+      background-color: #3b3b3b;
+    }
+
+    @keyframes dropDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 991px) {
+      .nav {
+        display: none;
       }
 
-      /* Estilo para el contenedor dentro del navbar */
-      .main-nav .container {
-        max-width: 100% !important;
-        padding-left: 40px;
-        padding-right: 40px;
+      .menu-trigger {
+        display: block;
       }
+    }
+  </style>
+</head>
 
-      /* Cuando hace scroll, agrandar el navbar */
-      .main-nav.scrolled {
-        padding: 15px 0;
-        background-color: #111 !important;
-      }
+<body>
+  <!-- Navbar -->
+  <nav class="main-nav">
+    <div class="container">
+      <a href="<?= base_url() ?>" class="logo">
+        <img src="<?= base_url() ?>public/assets/images/logo-t2.png" alt="Logo Intranet Sorteos" style="width: 14%;">
+      </a>
 
-      /* Estilo del logo */
-      .logo img {
-        width: 25%;
-        transition: all 0.3s ease;
-      }
+      <ul class="nav">
+        <li><a href="<?= base_url() ?>">Inicio</a></li>
+        <li><a href="<?= base_url('browse') ?>">Nosotros</a></li>
+        <li><a href="<?= base_url('details') ?>">Beneficios</a></li>
+        <li><a href="<?= base_url('streams') ?>">Tienda</a></li>
+        <?php if($this->session->userdata('logueado')): ?>
+          <li><a href="<?= base_url('eventos') ?>">Eventos</a></li>
+          <li><a href="<?= base_url('logout') ?>">Cerrar Sesión</a></li>
+        <?php else: ?>
+          <li><a href="<?= base_url('login') ?>">Iniciar Sesión</a></li>
+        <?php endif; ?>
+      </ul>
 
-      /* Menú de navegación */
-      .navbar-nav .nav-link {
-        color: #bcbcbc !important;
-        margin: 0 15px;
-        transition: color 0.3s ease;
-      }
-
-      .navbar-nav .nav-link.active,
-      .navbar-nav .nav-link:hover {
-        color: #ff4081 !important;
-      }
-
-      
-
-      /* animación al buscar */
-      .search-input input {
-        background-color: #222;
-        border: none;
-        color: white;
-      }
-
-      .search-input i {
-        color: white;
-      }
-
-      /* desplazamiento */
-      .main-nav {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background-color: #1e1e1e !important;
-        opacity: 1 !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        
-      }
-
-      /* Espaciado del navbar 
-      .header-area {
-        background-color: #1e1e1e !important;
-      }*/
-
-      
-      .main-nav * {
-        background-color: transparent !important;
-      }
-
-      .navbar {
-        padding: 20px 40px;
-        border-radius: 0 0 25px 25px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
-        width: 100%;
-      }
-
-  
-      .navbar-nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        list-style: none;
-      }
-
-      .navbar-nav li {
-        display: inline-block;
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- ***** Preloader Start ***** -->
-    <div id="js-preloader" class="js-preloader">
-      <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
+      <div class="menu-trigger" id="menuBtn"><span>☰</span></div>
     </div>
-    <!-- ***** Preloader End ***** -->
+  </nav>
 
- <!-- ***** Header Area Start ***** -->
-<header class="header-area">
-    <nav class="main-nav navbar navbar-expand-lg">
-        <div class="container d-flex justify-content-between align-items-center container-fluid">
-            <!-- Logo (sin cambios) -->
-            <a href="<?= base_url() ?>" class="logo">
-                <img src="<?= base_url() ?>public/assets/images/logo-t2.png" alt="" style="width: 25%;">
-            </a>
-
-            <!-- Buscador (sin cambios) -->
-            <div class="search-input">
-                <form id="search" action="#">
-                    <input type="text" placeholder="Escribe algo" id='searchText' name="searchKeyword" />
-                    <i class="fa fa-search"></i>
-                </form>
-            </div>
-
-            <!-- Menú Principal (optimizado) -->
-            <ul class="nav">
-              <!-- Elementos existentes (no los modifiques) -->
-              <li><a href="<?= base_url() ?>">Inicio</a></li>
-              <li><a href="<?= base_url('browse') ?>">Nosotros</a></li>
-              <li><a href="<?= base_url('details') ?>">Beneficios</a></li>
-              <li><a href="<?= base_url('streams') ?>">Tienda</a></li>
-              
-    <!-- Nuevo: Eventos SOLO para logueados -->
-    <?php if($this->session->userdata('logueado')): ?>
+  <!-- Menú móvil -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="<?= base_url() ?>">Inicio</a></li>
+      <li><a href="<?= base_url('browse') ?>">Nosotros</a></li>
+      <li><a href="<?= base_url('details') ?>">Beneficios</a></li>
+      <li><a href="<?= base_url('streams') ?>">Tienda</a></li>
+      <?php if($this->session->userdata('logueado')): ?>
         <li><a href="<?= base_url('eventos') ?>">Eventos</a></li>
-    <?php endif; ?>
-    
-    <!-- Botón de Login/Logout (sin cambiar estructura) -->
-    <?php if($this->session->userdata('logueado')): ?>
         <li><a href="<?= base_url('logout') ?>">Cerrar Sesión</a></li>
-    <?php else: ?>
+      <?php else: ?>
         <li><a href="<?= base_url('login') ?>">Iniciar Sesión</a></li>
-    <?php endif; ?>
-</ul>
-        </div>
-    </nav>
-</header>
+      <?php endif; ?>
+    </ul>
+  </div>
 
-          <!-- Botón de menú móvil -->
-          <a class='menu-trigger'>
-            <span></span>
-          </a>
-        </div>
-      </nav>
-    </header>
-    <!-- ***** Header Area End ***** -->
 
-    <!-- Aquí puedes añadir el resto de tu contenido -->
-    <div class="content">
-      <!-- Contenido aquí -->
-    </div>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-    <!-- Scripts de Bootstrap y JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
 
-    <script>
-      // Añadir la clase 'scrolled' al navbar cuando se haga scroll
-      $(window).scroll(function() {
-        if ($(this).scrollTop() > 50) {
-          $('.main-nav').addClass('scrolled');
-        } else {
-          $('.main-nav').removeClass('scrolled');
-        }
-      });
-    </script>
+    window.addEventListener('click', (e) => {
+      if (!mobileMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+  </script>
 
 
 
@@ -227,7 +225,7 @@
                 <div class="owl-features owl-carousel">
                   <div class="item">
                     <div class="thumb">
-                      <img src="assets/images/featured-01.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/featured-01.jpg" alt="">
                       <div class="hover-effect">
                         <h6>2.4K Streaming</h6>
                       </div>
@@ -240,7 +238,7 @@
                   </div>
                   <div class="item">
                     <div class="thumb">
-                      <img src="assets/images/featured-02.jpg" alt="">
+                      <img src="<?= base_url() ?>public/images/featured-02.jpg" alt="">
                       <div class="hover-effect">
                         <h6>2.4K Streaming</h6>
                       </div>
@@ -253,7 +251,7 @@
                   </div>
                   <div class="item">
                     <div class="thumb">
-                      <img src="assets/images/featured-03.jpg" alt="">
+                      <img src="<?= base_url() ?>public/assets/images/featured-03.jpg" alt="">
                       <div class="hover-effect">
                         <h6>2.4K Streaming</h6>
                       </div>
@@ -266,7 +264,7 @@
                   </div>
                   <div class="item">
                     <div class="thumb">
-                      <img src="assets/images/featured-01.jpg" alt="">
+                      <img src="<?= base_url() ?>public/assets/images/featured-01.jpg" alt="">
                       <div class="hover-effect">
                         <h6>2.4K Streaming</h6>
                       </div>
@@ -279,7 +277,7 @@
                   </div>
                   <div class="item">
                     <div class="thumb">
-                      <img src="assets/images/featured-02.jpg" alt="">
+                      <img src="<?= base_url() ?>public/assets/images/featured-02.jpg" alt="">
                       <div class="hover-effect">
                         <h6>2.4K Streaming</h6>
                       </div>
@@ -292,7 +290,7 @@
                   </div>
                   <div class="item">
                     <div class="thumb">
-                      <img src="assets/images/featured-03.jpg" alt="">
+                      <img src="<?= base_url() ?>public/assets/images/featured-03.jpg" alt="">
                       <div class="hover-effect">
                         <h6>2.4K Streaming</h6>
                       </div>
@@ -314,7 +312,7 @@
                 <ul>
                   <li>
                     <span>01</span>
-                    <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
+                    <img src="<?= base_url() ?>public/assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
                     <h6><i class="fa fa-check"></i> LahutaM</h6>
                     <div class="main-button">
                       <a href="#">Follow</a>
@@ -322,7 +320,7 @@
                   </li>
                   <li>
                     <span>02</span>
-                    <img src="assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
+                    <img src="<?= base_url() ?>public/assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
                     <h6><i class="fa fa-check"></i> Kengan</h6>
                     <div class="main-button">
                       <a href="#">Follow</a>
@@ -330,7 +328,7 @@
                   </li>
                   <li>
                     <span>03</span>
-                    <img src="assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
+                    <img src="<?= base_url() ?>public/assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
                     <h6><i class="fa fa-check"></i> Areluwa</h6>
                     <div class="main-button">
                       <a href="#">Follow</a>
@@ -338,7 +336,7 @@
                   </li>
                   <li>
                     <span>04</span>
-                    <img src="assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
+                    <img src="<?= base_url() ?>public/assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
                     <h6><i class="fa fa-check"></i> Omeg</h6>
                     <div class="main-button">
                       <a href="#">Follow</a>
@@ -346,7 +344,7 @@
                   </li>
                   <li>
                     <span>05</span>
-                    <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
+                    <img src="<?= base_url() ?>public/assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; margin-right: 15px;">
                     <h6><i class="fa fa-check"></i> GangTeam</h6>
                     <div class="main-button">
                       <a href="#">Follow</a>
@@ -369,7 +367,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-05.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-05.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -384,7 +382,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                      <img src="<?= base_url() ?>public/assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> Kengan Omeg</span>
                     <h4>Just Talking With Fans</h4>
@@ -394,7 +392,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-06.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-06.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -409,7 +407,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                     <img src="<?= base_url() ?>public/assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> LahutaMalc</span>
                     <h4>CS-GO 36 Hours Live Stream</h4>
@@ -419,7 +417,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-07.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-07.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -434,7 +432,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                      <img src="<?= base_url() ?>public/assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> Areluwa</span>
                     <h4>Maybe Nathej Allnight Chillin'</h4>
@@ -444,7 +442,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-08.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-08.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -459,7 +457,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                      <img src="<?= base_url() ?>public/assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> NewGangTeam</span>
                     <h4>Live Streaming Till Morning</h4>
@@ -469,7 +467,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-07.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-07.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -484,7 +482,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                      <img src="<?= base_url() ?>public/assets/images/avatar-01.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> Kengan Omeg</span>
                     <h4>Just Talking With Fans</h4>
@@ -494,7 +492,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-08.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-08.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -509,7 +507,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                      <img src="<?= base_url() ?>public/assets/images/avatar-02.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> LahutaMalc</span>
                     <h4>CS-GO 36 Hours Live Stream</h4>
@@ -519,7 +517,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-05.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-05.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -534,7 +532,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                      <<img src="<?= base_url() ?>public/assets/images/avatar-03.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> Areluwa</span>
                     <h4>Maybe Nathej Allnight Chillin'</h4>
@@ -544,7 +542,7 @@
               <div class="col-lg-3 col-sm-6">
                 <div class="item">
                   <div class="thumb">
-                    <img src="assets/images/stream-06.jpg" alt="">
+                    <img src="<?= base_url() ?>public/assets/images/stream-06.jpg" alt="">
                     <div class="hover-effect">
                       <div class="content">
                         <div class="live">
@@ -559,7 +557,7 @@
                   </div>
                   <div class="down-content">
                     <div class="avatar">
-                      <img src="assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
+                      <img src="<?= base_url() ?>public/assets/images/avatar-04.jpg" alt="" style="max-width: 46px; border-radius: 50%; float: left;">
                     </div>
                     <span><i class="fa fa-check"></i> NewGangTeam</span>
                     <h4>Live Streaming Till Morning</h4>

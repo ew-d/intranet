@@ -12,6 +12,6 @@ class Eventos extends CI_Controller {
 
     public function index() {
         // Carga la vista de eventos (la crearemos en el paso 3)
-        $this->load->view('eventos_view');
+        $this->load->view('eventos');
     }
 }
