@@ -2,149 +2,181 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Registro | Sal De Apuros</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: #0b0f1c;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0a0a1a;
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
+      align-items: center;
+      min-height: 100vh;
+      padding: 0 1rem;
+      position: relative; /* Permite colocar el botón en la esquina sin afectar el contenido */
     }
 
-    .register-container {
-      background-color: #1a1d2e;
-      border-radius: 25px;
-      padding: 3rem 2rem;
-      max-width: 420px;
+    .form-container {
+      background-color: #0c0c1e;
+      padding: 2rem;
+      border-radius: 1.5rem;
       width: 100%;
+      max-width: 400px;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+    }
+
+    .form-container h2 {
+      color: #fbbc04;
       text-align: center;
-      color: white;
-    }
-
-    .register-container img {
-      width: 150px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
-
-    h2 {
-      font-size: 1.5rem;
       margin-bottom: 1.5rem;
-      color: #ffc107;
     }
 
-    .form-group {
+    .form-container label {
+      color: #ffffff;
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .form-container input,
+    .form-container select {
+      width: 100%;
+      padding: 0.75rem 1rem;
       margin-bottom: 1.2rem;
+      border: none;
+      border-radius: 0.7rem;
+      background-color: #1e1e2f;
+      color: #fff;
+      font-size: 1rem;
+      transition: 0.3s;
+      box-sizing: border-box;
+    }
+
+    .form-container input:focus,
+    .form-container select:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #8a2be2;
+    }
+
+    .form-note {
       text-align: left;
+      margin-top: -10px;
+      margin-bottom: 15px;
     }
 
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 0.8rem;
-      border: none;
-      border-radius: 10px;
-      background-color: #2a2d3f;
-      color: white;
-      font-size: 1rem;
-    }
-
-    .success-message {
-      color: #4caf50;
-      background-color: rgba(76, 175, 80, 0.1);
-      padding: 0.8rem;
-      border-radius: 10px;
-      margin-bottom: 1.2rem;
-      font-size: 0.9rem;
-    }
-
-    .error-message {
-      color: #ff5252;
-      background-color: rgba(255, 82, 82, 0.1);
-      padding: 0.8rem;
-      border-radius: 10px;
-      margin-bottom: 1.2rem;
-      font-size: 0.9rem;
-    }
-
-    .btn-register {
-      margin-top: 1rem;
-      padding: 0.8rem;
-      background: linear-gradient(to right, #6c5dd3, #8f44fd);
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-weight: bold;
-      width: 100%;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-
-    .btn-register:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-    }
-
-    .login-link {
-      margin-top: 1.5rem;
-      display: block;
-      color: #bbb;
+    .form-note a {
+      color: #fbbc04;
+      font-size: 0.85rem;
       text-decoration: none;
-      font-size: 0.9rem;
     }
 
-    .login-link:hover {
-      color: #ffc107;
+    .form-container button {
+      width: 100%;
+      padding: 0.9rem;
+      background: linear-gradient(135deg, #8a2be2, #7b1fa2);
+      border: none;
+      border-radius: 0.8rem;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-container button:hover {
+      background: linear-gradient(135deg, #9c47ff, #a56eff);
+    }
+
+    .form-container .login-link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .form-container .login-link a {
+      color: #ccc;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+
+    /* Estilo para el botón "Volver" */
+    .back-button {
+      width: auto;
+      padding: 0.7rem 1.2rem;
+      background: linear-gradient(135deg, #ff4081, #ff3366);
+      border: none;
+      border-radius: 0.8rem;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: absolute; /* Fija el botón en la esquina */
+      top: 20px; /* Ubicado en la parte superior */
+      left: 20px; /* Ubicado en la parte izquierda */
+      box-sizing: border-box;
+    }
+
+    .back-button:hover {
+      background: linear-gradient(135deg, #ff6699, #ff5577);
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 1.5rem;
+      }
+
+      .form-container h2 {
+        font-size: 1.3rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="register-container">
-    
+
+  <!-- Botón "Volver" en la esquina superior izquierda -->
+  <a href="<?= base_url() ?>">
+    <button class="back-button">Volver al inicio</button>
+  </a>
+
+  <div class="form-container">
     <h2>¡Adquiere tus beneficios aquí!</h2>
+    <form method="post" action="<?= base_url('auth/registrar') ?>">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
 
-    <?php if ($this->session->flashdata('success')): ?>
-      <div class="success-message"><?= $this->session->flashdata('success') ?></div>
-    <?php endif; ?>
-    
-    <?php if ($this->session->flashdata('error')): ?>
-      <div class="error-message"><?= $this->session->flashdata('error') ?></div>
-    <?php endif; ?>
+      <label for="dni">DNI</label>
+      <input type="text" id="dni" name="dni" placeholder="Ingresa tu DNI" required>
 
-    <form action="<?= site_url('auth/registrar_usuario') ?>" method="POST">
-      <div class="form-group">
-        <label for="nombre">Nombre completo</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
+      <label for="celular">Celular</label>
+      <input type="text" id="celular" name="celular" placeholder="Ingresa tu número de celular" required>
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" placeholder="Ingresa tu correo" required>
+
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" name="clave" placeholder="********" required>
+
+      <label for="plan">¿Qué plan deseas?</label>
+      <select id="plan" name="plan" required>
+        <option disabled selected>-- Selecciona un plan --</option>
+        <option value="mensual">Mensual - $15.00</option>
+        <option value="anual">Anual - $150.00</option>
+      </select>
+
+      <div class="form-note">
+        <a href="<?= base_url() ?>#planes-vigentes">Conoce nuestros planes</a>
       </div>
 
-      <div class="form-group">
-        <label for="correo">Correo electrónico</label>
-        <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" required>
-      </div>
+      <button type="submit">Registrarse</button>
 
-      <div class="form-group">
-        <label for="contrasena">Contraseña</label>
-        <input type="password" id="contrasena" name="contrasena" placeholder="Crea tu contraseña" required>
+      <div class="login-link">
+        <a href="<?= base_url('auth/login') ?>">¿Ya tienes cuenta? Inicia sesión</a>
       </div>
-
-      <button type="submit" class="btn-register">Registrarse</button>
     </form>
-
-    <a href="<?= site_url('auth/login_usuario') ?>" class="login-link">¿Ya tienes cuenta? Inicia sesión</a>
   </div>
+
 </body>
 </html>

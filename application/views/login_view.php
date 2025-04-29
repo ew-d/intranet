@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-'  <title>Login | Sal De Apuros</title>
+  <title>Login | Sal De Apuros</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= base_url('assets/css/formulario.css') ?>">
   <style>
@@ -42,6 +42,8 @@
       text-decoration: none;
       margin-bottom: 1.5rem;
       transition: background 0.3s ease;
+      top: 20px;
+      left: 20px;
     }
 
     .btn-volver-inicio:hover {
@@ -137,18 +139,17 @@
 </head>
 <body>
 
-<div id="dot">
-  <a href="<?= site_url('/') ?>" class="btn-volver-inicio">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icono" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
-    </svg>
-    Ir a la página de inicio
-  </a>
-</div>
+<!-- Botón "Volver" en la esquina superior izquierda -->
+<a href="<?= site_url('/') ?>" class="btn-volver-inicio">
+  <svg xmlns="http://www.w3.org/2000/svg" class="icono" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+  </svg>
+  Ir a la página de inicio
+</a>
 
   <div class="login-container">
-    <img src="<?= base_url() ?>public/assets/images/stream-05.jpg"? alt="sal de apuros">
+    <img src="<?= base_url() ?>public/assets/images/stream-05.jpg" alt="sal de apuros">
     <h2>¡Bienvenido a <span style="color:#ffc107;">Sal de Apuros</span>!</h2>
 
     <?php if ($this->session->flashdata('error')): ?>
@@ -175,4 +176,3 @@
   </div>
 </body>
 </html>
-'
